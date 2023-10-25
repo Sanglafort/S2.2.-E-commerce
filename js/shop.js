@@ -78,11 +78,12 @@ var total = 0;
 
 // Exercise 1
 function buy(id) {
-    for (let i = 0; i < products.lengt; i++) {
+    for (let i = 0; i < products.length; i++) {
         if(products[i].id === id) {
             cartList.push(products[i]);
             console.log("Se ha añadido un producto al carrito.")
-            console.log(products[i]);
+            console.table(cartList);
+            calculateTotal(cartList);
         }       
     }
     document.getElementById("count_product").innerHTML = cartList.length; 
@@ -93,17 +94,23 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    cart = 0;
-    cartList = 0;
+    cart = [];
+    cartList = [];
 
-    console.log("Elcarrito está vacío.");
+    console.log("El carrito está vacío.");
     document.getElementById("count_product").innerHTML = cartList.length; 
-
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    total = 0;
+    for (let i = 0; i < cartList.length; i++) {
+        total += cartList[i].price;
+    }
+    console.log("El precio total es de $" + total);
+    document.getElementById("total_price").innerHTML = total;
+
 }
 
 // Exercise 4
