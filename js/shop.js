@@ -82,9 +82,10 @@ function buy(id) {
         if(products[i].id === id) {
             cartList.push(products[i]);
             console.log("Se ha añadido un producto al carrito.")
-            console.log(cartList);
+            console.log(products[i]);
         }       
-    }   
+    }
+    document.getElementById("count_product").innerHTML = cartList.length; 
 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
@@ -92,9 +93,11 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-    for (let i = cartList.length; i <= 0; i++) {
-        
-    }
+    cart = 0;
+    cartList = 0;
+
+    console.log("Elcarrito está vacío.");
+    document.getElementById("count_product").innerHTML = cartList.length; 
 
 }
 
