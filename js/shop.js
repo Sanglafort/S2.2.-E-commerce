@@ -78,19 +78,23 @@ var total = 0;
 
 // Exercise 1
 function buy(id) {
-    const found = products.find(id);
-    if(cartList.includes(found) === false) {
-        cartList.push(found)
-    } else {
-        
-    }
-    
+    for (let i = 0; i < products.lengt; i++) {
+        if(products[i].id === id) {
+            cartList.push(products[i]);
+            console.log("Se ha añadido un producto al carrito.")
+            console.log(cartList);
+        }       
+    }   
+
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
 }
 
 // Exercise 2
 function cleanCart() {
+    for (let i = cartList.length; i <= 0; i++) {
+        
+    }
 
 }
 
