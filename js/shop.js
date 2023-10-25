@@ -78,29 +78,19 @@ var total = 0;
 
 
 function checkQuantity() {
+    cart = [];
+
     for (let i = 0; i < cartList.length; i++) {
         let currentProduct = cartList[i];
 
-        let found= false;
+        let productIndex = cart.findIndex((product) => product.id === currentProduct.id)
+        // console.log(productIndex);
 
-        // Si el producto está en el carrito, se cambia a encontrado (found = true) y se le añade 1 más a la cantidad (quantity + 1).
-        for (j = 0; j < cart.length; j++) {
-            if (cart[j].id === currentProduct.id) {
-                cart[j].quantity++
-                found = true;
-                break;
-            }
-        }
-        // Si no está añadido al carrito, se añade creando un nuevo objeto con todas la propiedades de products más la propiedad quantity: 1.
-        if (!found) {
-            let newCartItem = {
-                id: currentProduct.id,
-                name: currentProduct.name,
-                price: currentProduct.price,
-                type: currentProduct.type,
-                quantity: 1,
-            }
-            cart.push(newCartItem);
+        if (productIndex === -1) {
+            currentProduct.quantity = 1
+            cart.push(currentProduct)
+        } else {
+            cart[productIndex].quantity += 1
         }
     }
     console.table(cart);
@@ -111,7 +101,6 @@ function checkQuantity() {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array
 function buy(id) {
-    debugger
     for (let i = 0; i < products.length; i++) {
         if(products[i].id === id) {
             cartList.push(products[i]);
