@@ -76,21 +76,53 @@ let cartList = []
 
 var total = 0;
 
+
+function checkQuantity() {
+    for (let i = 0; i < cartList.length; i++) {
+        let currentProduct = cartList[i];
+
+        let found= false;
+
+        // Si el producto está en el carrito, se cambia a encontrado (found = true) y se le añade 1 más a la cantidad (quantity + 1).
+        for (j = 0; j < cart.length; j++) {
+            if (cart[j].id === currentProduct.id) {
+                cart[j].quantity++
+                found = true;
+                break;
+            }
+        }
+        // Si no está añadido al carrito, se añade creando un nuevo objeto con todas la propiedades de products más la propiedad quantity: 1.
+        if (!found) {
+            let newCartItem = {
+                id: currentProduct.id,
+                name: currentProduct.name,
+                price: currentProduct.price,
+                type: currentProduct.type,
+                quantity: 1,
+            }
+            cart.push(newCartItem);
+        }
+    }
+    console.table(cart);
+}
+
+
 // Exercise 1
+    // 1. Loop for to the array products to get the item to add to cart
+    // 2. Add found product to the cart array
 function buy(id) {
+    debugger
     for (let i = 0; i < products.length; i++) {
         if(products[i].id === id) {
             cartList.push(products[i]);
             console.log("Se ha añadido un producto al carrito.")
-            console.table(cartList);
             calculateTotal(cartList);
         }       
     }
+    checkQuantity()
     document.getElementById("count_product").innerHTML = cartList.length; 
-
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
 }
+
 
 // Exercise 2
 function cleanCart() {
@@ -109,13 +141,12 @@ function calculateTotal() {
         total += cartList[i].price;
     }
     console.log("El precio total es de $" + total);
-    document.getElementById("total_price").innerHTML = total;
-
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    
 }
 
 // Exercise 5
