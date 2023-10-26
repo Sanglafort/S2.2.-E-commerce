@@ -130,28 +130,24 @@ function calculateTotal() {
     for (let i = 0; i < cartList.length; i++) {
         total += cartList[i].price;
     }
-    applyPromotionsCart();
     console.log("El precio total es de $" + total);
+    applyPromotionsCart();
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
-    total = 0;
 
     for (let i = 0; i < cart.length; i++) {
         let product = cart[i];
 
         if (product.hasOwnProperty("offer") && product.quantity >= product.offer.number) {
             product.subtotalWithDiscount = product.quantity * product.price * (product.offer.percent/100);
-            total += product.subtotalWithDiscount;
-        } else {
-            product.subtotalWithDiscount = product.quantity * product.price;
-            total += product.subtotalWithDiscount;
-        }
-        console.log(total)
+            total -= product.subtotalWithDiscount;
+     
+            console.log(`->El descuento por "${product.name}" es de $` + product.subtotalWithDiscount.toFixed(2));
+        }   
     }
- 
 }
 
 // Exercise 5
