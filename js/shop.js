@@ -145,7 +145,9 @@ function applyPromotionsCart() {
             product.subtotalWithDiscount = product.quantity * product.price * (product.offer.percent/100);
             total -= product.subtotalWithDiscount;
      
-            console.log(`->El descuento por "${product.name}" es de $` + product.subtotalWithDiscount.toFixed(2));
+            console.log(`-> El descuento por "${product.name}" es de $` + product.subtotalWithDiscount.toFixed(2));
+        } else {
+            product.subtotalWithDiscount = 0;
         }   
     }
 }
@@ -153,6 +155,27 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    let printedCart = [];
+    
+    for (let i = 0; i < cart.length; i++) {
+        let product = cart[i];
+
+        let discount = (product.price * product.quantity) - product.subtotalWithDiscount;
+
+        printedCart.push(
+            `<tr>
+				<th>${product.name}</th>
+				<td>${product.price.toFixed(2)}</td>
+				<td>${product.quantity}</td>
+				<td>${discount}</td>
+                <td><a type="button" onclick="removeFromCart(${product.id})"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+			</tr>`
+        );
+    }
+    document.getElementById("cart_list").innerHTML = printedCart;
+
+    document.getElementById("total_price").innerHTML = total.toFixed(2);
+
 }
 
 
