@@ -172,7 +172,7 @@ function printCart() {
 			</tr>`
         );
     }
-    document.getElementById("cart_list").innerHTML = printedCart;
+    document.getElementById("cart_list").innerHTML = printedCart.join("");
 
     document.getElementById("total_price").innerHTML = total.toFixed(2);
 
