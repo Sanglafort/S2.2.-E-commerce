@@ -117,6 +117,8 @@ function buy(id) {
 function cleanCart() {
     cart = [];
     cartList = [];
+    total = 0;  // o también calculateTotal();
+    printCart();
 
     console.clear()
     console.log("El carrito está vacío.");
@@ -155,6 +157,9 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    applyPromotionsCart();
+
     let printedCart = [];
     
     for (let i = 0; i < cart.length; i++) {
@@ -183,9 +188,25 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+    const cartIndex = cart.findIndex((item) => item.id === id);
+    const cartListIndex = cartList.findIndex((item) => item.id === id);
+
+    if(cartIndex !== -1 && cartListIndex !== -1) {
+        if(cart[cartIndex].quantity > 1){
+            cart[cartIndex].quantity -= 1;
+        } else {
+            cart.splice(cartIndex, 1);
+        }
+        cartList.splice(cartListIndex, 1);
+    }
+
+    calculateTotal();   
+    printCart();
+    document.getElementById("count_product").innerHTML = cartList.length; 
 
 }
 
 function open_modal() {
+
     printCart();
 }
